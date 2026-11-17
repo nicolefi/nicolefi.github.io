@@ -35,7 +35,7 @@
       }
     }
     main { max-width: 1120px; margin: 3rem auto; padding: 0 1.5rem; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: start; }
     .card {
       background: white;
       border-radius: 12px;
@@ -43,13 +43,13 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
     .card:hover {
       transform: scale(1.03);
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
     }
+    .card h2 { margin-top: 0; margin-bottom: 0.8rem; font-size: 1.35rem; color: #0f172a; }
     .card-img {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -60,21 +60,6 @@
       display: block;
       margin-bottom: 1rem;
     }
-    .card h2 { margin-top: 0; margin-bottom: 0.7rem; font-size: 1.35rem; color: #0f172a; }
-    .card p { color: #475569; font-size: 0.95rem; margin-top: 0; margin-bottom: 1rem; }
-    .card-details {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 1.2rem 0;
-      font-size: 0.88rem;
-      color: #334155;
-      background: #f8fafc;
-      border-left: 3px solid #2563eb;
-      padding: 0.75rem 0.9rem;
-      border-radius: 0 6px 6px 0;
-    }
-    .card-details li { margin-bottom: 0.35rem; }
-    .card-details li:last-child { margin-bottom: 0; }
     .tags {
       display: flex;
       flex-wrap: wrap;
@@ -89,10 +74,54 @@
       padding: 0.25rem 0.65rem;
       border-radius: 999px;
     }
-    .btn-group { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.5rem; }
-    .btn { text-decoration: none; padding: 0.6rem 1.1rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; }
+    .btn-group { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .btn { text-decoration: none; padding: 0.65rem 1.2rem; border-radius: 6px; font-weight: 600; font-size: 0.92rem; display: inline-block; }
     .btn-primary { background: #2563eb; color: white; }
     .btn-primary:hover { background: #1d4ed8; }
+    
+    /* Aufklappbarer Detail-Bereich */
+    details {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 0.8rem;
+      margin-top: 0.2rem;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #2563eb;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "+";
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    details[open] summary::after {
+      content: "−";
+    }
+    .details-content {
+      margin-top: 0.9rem;
+      font-size: 0.92rem;
+      color: #475569;
+    }
+    .card-details {
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      margin: 0.8rem 0 0 0;
+      font-size: 0.86rem;
+      color: #334155;
+      background: #f8fafc;
+      border-left: 3px solid #2563eb;
+      border-radius: 0 6px 6px 0;
+    }
+    .card-details li { margin-bottom: 0.35rem; }
+    .card-details li:last-child { margin-bottom: 0; }
+    
     footer { text-align: center; padding: 2rem; color: #64748b; font-size: 0.9rem; }
   </style>
 </head>
@@ -112,62 +141,71 @@
   <div class="grid">
     
     <div class="card">
-      <div>
-        <h2>KI im Büro (Articulate Storyline)</h2>
-        <p>Szenariobasiertes E-Learning für Büroangestellte. Vermittelt praxisnahe Regeln für den sicheren Umgang mit KI-Tools im Arbeitsalltag anhand interaktiver Fallbeispiele und Wissenschecks.</p>
-        <ul class="card-details">
-          <li><strong>Zielgruppe & Dauer:</strong> Büroangestellte · ca. 15 Min.</li>
-          <li><strong>Schwerpunkte:</strong> Sichere Datenauswahl (Datenschutz), strukturierter Prompt-Aufbau und Praxis-Quiz.</li>
-        </ul>
-        <div class="tags">
-          <span class="tag">Konzeption & Storyboard</span>
-          <span class="tag">Articulate Storyline</span>
-          <span class="tag">Szenarien</span>
-        </div>
-        <img src="Menü.png" alt="Vorschau KI im Büro" class="card-img">
+      <h2>KI im Büro (Articulate Storyline)</h2>
+      <img src="Menü.png" alt="Vorschau KI im Büro" class="card-img">
+      <div class="tags">
+        <span class="tag">Konzeption & Storyboard</span>
+        <span class="tag">Articulate Storyline</span>
+        <span class="tag">Szenarien</span>
       </div>
       <div class="btn-group">
         <a href="https://netlify.app" target="_blank" class="btn btn-primary">E-Learning starten</a>
       </div>
+      <details>
+        <summary>Details & Konzeption anzeigen</summary>
+        <div class="details-content">
+          <p>Szenariobasiertes E-Learning für Büroangestellte. Vermittelt praxisnahe Regeln für den sicheren Umgang mit KI-Tools im Arbeitsalltag anhand interaktiver Fallbeispiele und Wissenschecks.</p>
+          <ul class="card-details">
+            <li><strong>Zielgruppe & Dauer:</strong> Büroangestellte · ca. 15 Min.</li>
+            <li><strong>Schwerpunkte:</strong> Sichere Datenauswahl (Datenschutz), strukturierter Prompt-Aufbau und Praxis-Quiz.</li>
+          </ul>
+        </div>
+      </details>
     </div>
 
     <div class="card">
-      <div>
-        <h2>Microlearning: Bewegte Pause (Articulate Rise)</h2>
-        <p>Kompakte, mobilfreundliche Lerneinheit für mehr Ergonomie und Aktivität am Bildschirmarbeitsplatz. Kombiniert kurze Videoimpulse, interaktive Karten und alltagstaugliche Übungen.</p>
-        <ul class="card-details">
-          <li><strong>Zielgruppe & Dauer:</strong> Bildschirmarbeitende · ca. 5 Min.</li>
-          <li><strong>Schwerpunkte:</strong> Direkte Mitmach-Übungen, Flipcards und gesundheitsfördernde Routinen.</li>
-        </ul>
-        <div class="tags">
-          <span class="tag">Microlearning</span>
-          <span class="tag">Articulate Rise</span>
-          <span class="tag">Mobile Learning</span>
-        </div>
-        <img src="TitelbildMicrolearning.png" alt="Vorschau Microlearning Bewegte Pause" class="card-img">
+      <h2>Microlearning: Bewegte Pause (Articulate Rise)</h2>
+      <img src="TitelbildMicrolearning.png" alt="Vorschau Microlearning Bewegte Pause" class="card-img">
+      <div class="tags">
+        <span class="tag">Microlearning</span>
+        <span class="tag">Articulate Rise</span>
+        <span class="tag">Mobile Learning</span>
       </div>
       <div class="btn-group">
         <a href="https://netlify.app" target="_blank" class="btn btn-primary">E-Learning starten</a>
       </div>
+      <details>
+        <summary>Details & Konzeption anzeigen</summary>
+        <div class="details-content">
+          <p>Kompakte, mobilfreundliche Lerneinheit für mehr Ergonomie und Aktivität am Bildschirmarbeitsplatz. Kombiniert kurze Videoimpulse, interaktive Karten und alltagstaugliche Übungen.</p>
+          <ul class="card-details">
+            <li><strong>Zielgruppe & Dauer:</strong> Bildschirmarbeitende · ca. 5 Min.</li>
+            <li><strong>Schwerpunkte:</strong> Direkte Mitmach-Übungen, Flipcards und gesundheitsfördernde Routinen.</li>
+          </ul>
+        </div>
+      </details>
     </div>
 
     <div class="card">
-      <div>
-        <h2>E-Learning: Igel im Garten (Zebis digital)</h2>
-        <p>Altersgerechte, digitale Lernumgebung für die 3. Primarklasse. Fördert selbstständiges Entdecken durch spielerische Gamification-Elemente, vertonte Aufgabenstellungen und unmittelbares Audio-Feedback.</p>
-        <ul class="card-details">
-          <li><strong>Zielgruppe:</strong> 3. Primarklasse (Volksschule)</li>
-          <li><strong>Schwerpunkte:</strong> Gamification, Hörverstehen, Multiple-Choice und spielerisches Entdecken.</li>
-        </ul>
-        <div class="tags">
-          <span class="tag">Primarstufe</span>
-          <span class="tag">Gamification</span>
-          <span class="tag">Audio-Didaktik</span>
-          <span class="tag">Zebis digital</span>
-        </div>
-        <img src="Gamification-Igel.png" alt="Vorschau Igel im Garten" class="card-img">
-        <img src="Gamification-multipleChoice.png" alt="Vorschau Multiple Choice Igel" class="card-img">
+      <h2>E-Learning: Igel im Garten (Zebis digital)</h2>
+      <img src="Gamification-Igel.png" alt="Vorschau Igel im Garten" class="card-img">
+      <div class="tags">
+        <span class="tag">Primarstufe</span>
+        <span class="tag">Gamification</span>
+        <span class="tag">Audio-Didaktik</span>
+        <span class="tag">Zebis digital</span>
       </div>
+      <details>
+        <summary>Details & Konzeption anzeigen</summary>
+        <div class="details-content">
+          <p>Altersgerechte, digitale Lernumgebung für die 3. Primarklasse. Fördert selbstständiges Entdecken durch spielerische Gamification-Elemente, vertonte Aufgabenstellungen und unmittelbares Audio-Feedback.</p>
+          <ul class="card-details">
+            <li><strong>Zielgruppe:</strong> 3. Primarklasse (Volksschule)</li>
+            <li><strong>Schwerpunkte:</strong> Gamification, Hörverstehen, Multiple-Choice und spielerisches Entdecken.</li>
+          </ul>
+          <img src="Gamification-multipleChoice.png" alt="Vorschau Multiple Choice Igel" class="card-img" style="margin-top: 0.9rem; margin-bottom: 0;">
+        </div>
+      </details>
     </div>
 
   </div>
@@ -179,6 +217,7 @@
 
 </body>
 </html>
+
 
 
 
